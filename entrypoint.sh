@@ -1,16 +1,15 @@
 #!/bin/bash
 set -e
 
-# Wait for DB host to respond
 echo "Checking Database Connection..."
 
-# Initialize ERPNext Site automatically using Environment Variables
 if [ ! -d "sites/qsr-app.onrender.com" ]; then
     echo "Creating new site qsr-app.onrender.com..."
     
     bench new-site qsr-app.onrender.com \
       --db-host "$DB_HOST" \
       --db-port "$DB_PORT" \
+      --db-name "erpnext_db" \
       --mariadb-root-username "$DB_USER" \
       --mariadb-root-password "$DB_PASSWORD" \
       --admin-password "$ADMIN_PASSWORD" \
