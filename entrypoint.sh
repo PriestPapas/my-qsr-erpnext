@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+
+# Wait for DB host to respond
+echo "Checking Database Connection..."
+
+# Initialize ERPNext Site automatically using Environment Variables
+if [ ! -d "sites/qsr-app.onrender.com" ]; then
+    echo "Creating new site qsr-app.onrender.com..."
+    
+    bench new-site qsr-app.onrender.com \
+      --db-host "$DB_HOST" \
+      --db-port "$DB_PORT" \
+      --mariadb-root-username "$DB_USER" \
+      --mariadb-root-password "$DB_PASSWORD" \
+      --admin-password "$ADMIN_PASSWORD" \
+      --install-app erpnext \
+      --no-mariadb-socket
+
+    echo "Installing NAV Custom UI App..."
+    bench --site qsr-app.onrender.com install-app frappe_custom_ui_app
+fi
+
+echo "Starting ERPNext Server..."
+exec bench serve --port 8000
