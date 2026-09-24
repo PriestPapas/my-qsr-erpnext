@@ -1,11 +1,14 @@
 services:
-  # 1. Main ERPNext Web Application
   - type: web
-    name: qsr-erpnext-web
-    env: dockerfile
-    plan: starter # Render Starter Tier
+    name: erpnext-qsr-app
+    runtime: docker
+    plan: free
     dockerfilePath: ./Dockerfile
     dockerCommand: bench serve --port 8000
     envVars:
-  
- 
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "3306"
+      - key: REDIS_CACHE
+        sync: false
