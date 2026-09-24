@@ -15,8 +15,7 @@ services:
         value: Eg4Tjjoe5BtvsD7T1VcIBHXF
       - key: ADMIN_PASSWORD
         value: YourSecureAdminPassword123
-      - key: REDIS_CACHE
-        value: mysql://root:Eg4Tjjoe5BtvsD7T1VcIBHXF@erpnext-db-holy-ember.ovh2.cloud.layerbase.dev:22091/erpnext_db?ssl-mode=REQUIRED
+      
 
   - type: worker
     name: erpnext-qsr-worker
